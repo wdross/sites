@@ -1,0 +1,112 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="Author" content="Wayne Ross">
+   <meta name="GENERATOR" content="Mozilla/4.51 [en] (Win95; I) [Netscape]">
+   <title>Ross Picture page</title>
+   <base target="picture">
+
+
+<script language="JavaScript">
+<!--
+function MM_checkBrowser(NSvers,NSpass,NSnoPass,IEvers,IEpass,IEnoPass,OBpass,URL,altURL) { //v2.0
+  var newURL = '', version = parseFloat(navigator.appVersion);
+  if (navigator.appName.indexOf('Netscape') != -1) {
+    if (version >= NSvers) {if (NSpass>0) newURL = (NSpass==1)?URL:altURL;}
+    else {if (NSnoPass>0) newURL = (NSnoPass==1)?URL:altURL;}
+  } else if (navigator.appName.indexOf('Microsoft') != -1) {
+    if (version >= IEvers) {if (IEpass>0) newURL = (IEpass==1)?URL:altURL;}
+    else {if (IEnoPass>0) newURL = (IEnoPass==1)?URL:altURL;}
+  } else if (OBpass>0) newURL = (OBpass==1)?URL:altURL;
+  if (newURL) {
+    window.location = unescape(newURL);
+    document.MM_returnValue = false;
+  }
+}
+//-->
+</script>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" 
+      TEXT="#000000" 
+      pg" tracingopacity="100" 
+      onLoad="MM_checkBrowser(4.0,0,2,4.0,0,2,2,'','nofun.htm');return document.MM_returnValue">
+
+<layer NAME="a" 
+       LEFT="10" 
+       TOP="10" 
+       VISIBILITY="SHOW"
+       CLIP="0,0,25,25" 
+       background="batbat.gif">
+</layer>
+
+<script LANGUAGE="JavaScript1.2">
+// <!--
+var userAgent=navigator.appName + " " + navigator.appVersion;
+var agentInfo=userAgent.substring(0, 12);
+if(agentInfo >= "Netscape 4.0") {
+  window.captureEvents(Event.MOUSEMOVE);
+  // Logo animation
+  var yBase = window.innerHeight/2;
+  var xBase = window.innerWidth/2;
+  var delay = 15;
+  var yAmpl = 10;
+  var yMax = 40;
+  var step = .2;
+  var ystep = .5;
+  var currStep = 0;
+  var tAmpl=1;
+  var Xpos = 50;
+  var Ypos = 50;
+  var b = 0;
+  function MoveHandler(evnt) {
+    Xpos = evnt.pageX ;
+    Ypos = evnt.pageY ;
+  }
+  window.onMouseMove = MoveHandler;
+  function animateLogo() {
+    yBase = window.innerHeight/4 ;
+    xBase = window.innerWidth/4;
+    for ( b = 0 ; b < 1 ; b++ ) {
+      document.layers[b].top = Ypos +
+                               Math.cos((20*Math.sin(currStep/(20+b)))+b*70)*
+                               yBase*
+                               (Math.sin(10+currStep/10)+0.2)*Math.cos((currStep + b*25)/10);
+      document.layers[b].left =Xpos +
+                               Math.sin((20*Math.sin(currStep/20))+b*70)*
+                               xBase*
+                               (Math.sin(10+currStep/(10+b))+0.2)*Math.cos((currStep + b*25)/10);
+    }
+    currStep += step;
+    setTimeout("animateLogo()", delay) ;
+  }
+  animateLogo()
+}
+// -->
+</script>
+
+<p><font size=+1>Most recent School:</font>
+<br><a href="http://www.flatacrefarms.com/familytree/tree/Ind433.jpg">Rachel</a>
+<br><a href="http://www.flatacrefarms.com/familytree/tree/Ind421.jpg">Rebekah</a>
+
+<p><font size=+1>School, Spring, 2006:</font>
+<br><a href="http://www.flatacrefarms.com/familytree/tree/Ind3.jpg">Adam - Senior</a>
+<br><a href="http://www.flatacrefarms.com/familytree/tree/Ind4.jpg">David - Senior</a>
+
+<p><font size=+1>from Kelly</font><br>(taken August, 2000):
+<br><a href="BekahHayfieldAugust2000.jpg">Rebekah in hayfield</a>
+<br><a href="BekahAndRachelAtHakolaBarnAug2000.jpg">Girls at Hakola barn</a>
+<br><a href="BekahAndRachelInBarleyAug2000.jpg">- and in the Barley</a>
+<br><a href="BekahAndRachelInYardAug2000.jpg">Step lightly!</a>
+<br><a href="RachelWheelbarrowAug2000.jpg">Push me!</a>
+<br><a href="BekahBeingTossedAug2000.jpg">Those Uncle's!</a>
+
+<p><font size=+1>Wayne's Parents:</font>
+<br><a href="KenJudy.jpg">September 1995</a>
+
+<p><b><font size=+1>Back to <a href="index.html" TARGET="none">Main page</a></font></b>
+
+<embed src="fur_elise.mid" width=2 height=0 autostart=true loop=true>
+</body>
+</html>
