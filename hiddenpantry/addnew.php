@@ -2,6 +2,11 @@
 $quan = $_POST['quan'];
 $upc = $_POST["upc"];
 
+if ($upc == "")
+  $upc = $_GET['upc']; // maybe this was not a POST invocation
+if ($quan == "")
+  $quan = $_GET['quan'];
+
       echo '<TABLE id=AutoNumber5 style="BORDER-COLLAPSE: collapse" borderColor=#111111 bgcolor=black
       height=12 cellSpacing=3 cellPadding=3 width=600 border=1 align="center">
       <TBODY>
@@ -44,7 +49,7 @@ $size = $match[1];
 <TD  width="25%"  height=25 align=right vAlign=bottom>UPC: &nbsp </TD>
 <TD  width="75%"  height=25 align=LEFT vAlign=bottom><INPUT TYPE="TEXT" NAME="upc" SIZE="15" value="<?php echo $upc; ?>"></td></tr> 
 <TR><TD  width="25%"  height=25 align=right vAlign=bottom>BRAND: &nbsp </TD>
-<TD  width="75%"  height=25 align=left vAlign=bottom><INPUT TYPE="TEXT" NAME="brand" SIZE="20"></td></tr>
+<TD  width="75%"  height=25 align=left vAlign=bottom><INPUT TYPE="TEXT" NAME="brand" SIZE="20" autofocus></td></tr>
 <TR><TD  width="25%"  height=25 align=right vAlign=bottom> DESCRIPTION: &nbsp </TD>
 <TD  width="75%"  height=25 align=left vAlign=bottom><INPUT TYPE="TEXT" NAME="descrip" SIZE="30" value="<?php echo $desc; ?>"></TD></TR>
 <TR><TD  width="100%"  height=25 align=center vAlign=bottom COLSPAN=2><font size=2>

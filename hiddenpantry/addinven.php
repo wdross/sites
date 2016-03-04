@@ -17,6 +17,9 @@ document.form.upc.focus();
 
 <BODY onLoad="toForm()";>
 
+<meta http-equiv="refresh"
+content="30;url=removeinven.php"/>
+
 <?php
 include_once 'header.html';
 ?>

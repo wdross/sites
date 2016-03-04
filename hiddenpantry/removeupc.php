@@ -5,14 +5,20 @@ include_once 'db.php';
 $quan = $_POST['quan'];
 $upc = $_POST["upc"];
 
-if(($quan < 1)){ //if no quantity entered
-  echo "<center><b><font face='tahoma' color='red'>** You did not enter a quantity! **</font></center></b><br />";
-}else if($upc == "REMOVE"){
+if (($quan < 1) || (strtoupper($upc) == "REMOVE")) { // invalid quantity or "remove" scanned
   // basically a NOP - for if we are headless just show the same dialog
-  echo '<embed src="audio/Math/Subtract.wav" width=2 height=0 autostart=true>';
+  echo '<audio autoplay=true>';
+  echo '<source src="audio/Math/Subtract.wav" type="audio/wav">';
+  echo '  Your browser does not support the audio element.';
+  echo '</audio>';
+  if ($quan < 1)
+    echo "<center><b><font face='tahoma' color='red'>** You did not enter a quantity! **</font></center></b><br />";
   include_once 'removeinven.php';
-}else if($upc == "ADD"){
-  echo '<embed src="audio/Math/Add.wav" width=2 height=0 autostart=true>';
+}else if(strtoupper($upc) == "ADD") {
+  echo '<audio autoplay=true>';
+  echo '<source src="audio/Math/Add.wav" type="audio/wav">';
+  echo '  Your browser does not support the audio element.';
+  echo '</audio>';
   include_once 'addupc.php';
 }else{ // check existance of given upc
 
@@ -37,8 +43,12 @@ include_once 'removeinven.php';
     <TD width=600 height=12><CENTER>';
     echo "<center><b><font face='tahoma' color='red'>Item '".$upc."' does not exist in database!  Check your entry.</b><br/></font></center>";
     echo '</td></tr></table>';
-    echo '<embed src="audio/Common/Im_sorry.wav" width=2 height=0 autostart=true>';
-  }else{//found upc listed, close layer 2, start layer 2
+    echo '<audio autoplay=true>';
+    echo '<source src="audio/Common/Im_sorry.wav" type="audio/wav">';
+    echo '  Your browser does not support the audio element.';
+    echo '</audio>';
+  }
+  else{ // found upc listed
     $contlist=mysql_query("SELECT * FROM inven WHERE upc='$upc'");
 
     while ($all = mysql_fetch_array($contlist)) {
@@ -53,28 +63,26 @@ include_once 'removeinven.php';
 
     $quan2 = (($quan1)-($quan));
 
-    if(($quan2 < 0)){ //not enough qty in stock, start layer 3
-      echo '<embed src="audio/Common/Nope.wav" width=2 height=0 autostart=true>';
-      echo "<center><font face=verdana size=3><b>You do not have enough of this product in inventory to remove <br>the quantity you entered</b></font></center>";
-      echo "<br><center><font face='tahoma' color='black' size='2'>You only have <b>".$quan1."</b> ".$brand.", ".$descrip." - ".$size."<br />";
-      include_once 'footer.html';
+    if ($quan2 < 0) { //not enough qty in stock
+      $quan2 = 0;
+    }
 
-      }else{ //else, must have enuff onhand, update database, close layer 3, start layer 3
+    echo "<center><b><font face='tahoma' color='black'>Removed ".$descrip." </font></b><br />";
 
-      echo "<center><b><font face='tahoma' color='black'>Removed ".$descrip." </font></b><br />";
+    $sql = mysql_query("UPDATE inven SET quant='$quan2' WHERE upc='$upc'");
 
-      $sql = mysql_query("UPDATE inven SET quant=(('$quan1')-('$_POST[quan]')) WHERE upc='$upc'");
-
-      print('<TABLE id=AutoNumber4 style="BORDER-COLLAPSE: collapse" borderColor=#111111 height=12 cellSpacing=3 cellPadding=3 width=600 border=1>
-      <TBODY>
-      <TR>
-      <TD width=900 height=12><CENTER>');
+    print('<TABLE id=AutoNumber4 style="BORDER-COLLAPSE: collapse" borderColor=#111111 height=12 cellSpacing=3 cellPadding=3 width=600 border=1>
+    <TBODY>
+    <TR>
+    <TD width=900 height=12><CENTER>');
 include_once 'showone.php';
-      echo '</td></tr></table>';
-      if(!$sql){ //check for database errors, start layer 4
-        echo 'A database error occured while removing your product.';
-        echo '<embed src="audio/Common/Im_sorry.wav" width=2 height=0 autostart=true>';
-      } //close layer 4
+    echo '</td></tr></table>';
+    if(!$sql){ //check for database errors, start layer 4
+      echo 'A database error occured while removing your product.';
+      echo '<audio autoplay=true>';
+      echo '<source src="audio/Common/Im_sorry.wav" type="audio/wav">';
+      echo '  Your browser does not support the audio element.';
+      echo '</audio>';
     } //close layer 3
   } //close layer 2
 } //close layer 1
