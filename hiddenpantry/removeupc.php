@@ -5,7 +5,15 @@ include_once 'db.php';
 $quan = $_POST['quan'];
 $upc = $_POST["upc"];
 
-if (($quan < 1) || (strtoupper($upc) == "REMOVE")) { // invalid quantity or "remove" scanned
+if (substr(strtoupper($upc),0,9) == "QUANTITY ") {
+  $qty = substr($upc,9);
+  include_once 'removeinven.php';
+  echo '<audio autoplay=true>';
+  echo '<source src="audio/Numbers/'.$qty.'.wav" type="audio/wav">';
+  echo '  Your browser does not support the audio element.';
+  echo '</audio>';
+}
+else if (($quan < 1) || (strtoupper($upc) == "REMOVE")) { // invalid quantity or "remove" scanned
   // basically a NOP - for if we are headless just show the same dialog
   echo '<audio autoplay=true>';
   echo '<source src="audio/Math/Subtract.wav" type="audio/wav">';

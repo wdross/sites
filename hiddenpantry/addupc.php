@@ -23,6 +23,14 @@ if(strtoupper($upc) == "REMOVE"){
   echo '  Your browser does not support the audio element.';
   echo '</audio>';
 }
+else if (substr(strtoupper($upc),0,9) == "QUANTITY ") {
+  $qty = substr($upc,9);
+  include_once 'addinven.php';
+  echo '<audio autoplay=true>';
+  echo '<source src="audio/Numbers/'.$qty.'.wav" type="audio/wav">';
+  echo '  Your browser does not support the audio element.';
+  echo '</audio>';
+}
 else if ((strtoupper($upc) == "ADD") || ($quan < 0) || (strlen($upc) <= 4)) {
   // basically a NOP, show the same screen - if we are headless this is OK
   include_once 'addinven.php';

@@ -20,6 +20,10 @@ document.form.upc.focus();
 
 <?php
 include_once 'header.html';
+  // When undefined, default to qty of 1.
+  // Allows removeupc.php to define $qty and include this to alter the quantity
+  if (empty($qty))
+    $qty = "1";
 ?>
 
 <center>
@@ -40,7 +44,11 @@ include_once 'header.html';
 <TBODY>
 <TR>
 <TD width=900 height=12><CENTER><BR><BR>
-<INPUT TYPE="TEXT" NAME="quan" SIZE="2" value="1"> Quantity<BR><BR><BR>
+<INPUT TYPE="TEXT" NAME="quan" SIZE="2" value="
+<?php
+  echo $qty;
+?>
+"> Quantity<BR><BR><BR>
 <INPUT TYPE='TEXT' NAME='upc' ID= 'upc' VALUE='<?php echo "$code";?>' SIZE='15'> UPC<BR><BR><BR>
 <p>
 <center><a href="https://play.google.com/store/apps/details?id=com.tecit.android.barcodekbd.demo" onClick="closeWin()">Install Barcode Keyboard Demo for Droid</a></center><BR><BR><br>

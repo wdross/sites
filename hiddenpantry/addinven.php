@@ -18,10 +18,14 @@ document.form.upc.focus();
 <BODY onLoad="toForm()";>
 
 <meta http-equiv="refresh"
-content="30;url=removeinven.php"/>
+content="300;url=removeinven.php"/>
 
 <?php
 include_once 'header.html';
+  // When undefined, default to qty of 1.
+  // Allows addupc.php to define $qty and include this to default the qty to a new value
+  if (empty($qty))
+    $qty = "1";
 ?>
 
 <center>
@@ -42,7 +46,11 @@ include_once 'header.html';
 <TBODY>
 <TR>
 <TD width=100% height=12><CENTER><br><br>
-<INPUT TYPE="TEXT" NAME="quan" SIZE="2" value="1"> Quantity<BR><br><br>
+<INPUT TYPE="TEXT" NAME="quan" SIZE="2" value="
+<?php
+  echo $qty;
+?>
+"> Quantity<BR><br><br>
 <INPUT TYPE='TEXT' NAME='upc' ID= 'upc' VALUE='' SIZE='15'> UPC<BR><BR><br><br>
 
 <center><a href="https://play.google.com/store/apps/details?id=com.tecit.android.barcodekbd.demo" onClick="closeWin()">Install Barcode Keyboard Demo for Droid</a></center><BR><BR><br>
