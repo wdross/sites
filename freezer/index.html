@@ -26,7 +26,7 @@
 				chart.series[0].addPoint(eval(point), true, shift);
 
 				// call it again after 30 seconds
-				setTimeout(requestData, 1000);	
+				setTimeout(requestData, 3000);
 			},
 			cache: false
 		});
@@ -54,7 +54,7 @@ $(document).ready(function() {
 			maxPadding: 0.2,
 			title: {
 				text: 'F',
-				margin: 80
+				margin: 40
 			}
 		},
 		legend: {
@@ -71,7 +71,7 @@ $(document).ready(function() {
 </head>
 <body>
 	<!-- 3. Add the container -->
-	<div id="container" style="width: 800px; height: 400px; margin: 0 auto"></div>
+	<div id="container" style="width: 100%; height: 400px; margin: 0 auto"></div>
 
 </body>
 </html>
