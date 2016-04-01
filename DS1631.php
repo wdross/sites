@@ -22,7 +22,15 @@ class DS1631 {
 
   public function C() {
     // read the temperature (C)
-    return $this->I2c->read_signed_short(0xaa)/256;
+    $c = $this->I2c->read_signed_byte(0xaa);
+    if ($c == -60) {
+      // default value means we haven't started conversion
+      // or it got reset.  In any case, get us going again
+      $this->start_conversion();
+      // and update our value
+      $c = $this->I2c->read_signed_byte(0xaa);
+    }
+    return $c;
   }
 
   public function f() {

@@ -26,6 +26,15 @@
       return trim( shell_exec( 'sudo i2cget -y ' . $this->block . ' ' . $this->i2c_address . ' ' . $register ) );
     }
 
+    public function read_signed_byte(
+                                     $msb_register // byte register location
+                                    ) {
+      $msb = intval( $this->read_register( $msb_register ), 16 );
+      $array = unpack( 's', pack( 'v', $msb << 8 ) );
+      $decimal_value = $array[1]/256;
+      return $decimal_value;
+    }
+
     public function read_signed_short(
                                       $msb_register // most significant byte register location
                                      ) {
