@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Recent freezer temperature</title>
+	<title>Recent freezer temperatures</title>
 
 	<!-- 1. Add these JavaScript inclusions in the head of your page -->
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.js"></script>
@@ -17,7 +17,7 @@
 	 */
 	function requestData() {
 		$.ajax({
-			url: 'live-server-data.php', 
+			url: 'live-server-data.php',
 			success: function(point) {
 				var series = chart.series[0],
 				    shift = series.data.length > 60; // shift if the series is too long
@@ -25,8 +25,8 @@
 				// add the point
 				chart.series[0].addPoint(eval(point), true, shift);
 
-				// call it again after 30 seconds
-				setTimeout(requestData, 3000);
+				// call it again after 4 seconds
+				setTimeout(requestData, 4000);
 			},
 			cache: false
 		});
@@ -61,8 +61,21 @@ $(document).ready(function() {
 		    enabled: false
 		},
 	        series: [{
-	            name: 'Random data',
-	            data: []
+	            name: 'Deg F',
+	            data: [
+<?php
+// Open the CSV maintained by the background Python script and load
+// our array of data with the information stored in there (since midnight)
+if (($handle = fopen("freezer.csv", "r")) !== FALSE) {
+    while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+        if (count($data) >= 2) { // valid lines have 2 or more columns of data
+            echo "[" . $data[0] . "," . $data[1] . "],\n";
+        }
+    }
+    fclose($handle);
+}
+?>
+	            ]
 	        }]
 	    });
     });
