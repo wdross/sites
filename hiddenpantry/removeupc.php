@@ -43,6 +43,18 @@ include_once 'removeinven.php';
     $user_check = mysql_num_rows($sql_user_check);
   }
 
+  if ($user_check <= 0 and
+      strlen($upc) == 7) { //if short upc doesn't exist in database, check for one with 1 more digit
+    $search = "'^$upc";
+    $search .= "[0-9]$'"; // built in 2 steps, as otherwise [] looks like a subscript on $upc
+    $sql_user_check = mysql_query("SELECT upc FROM inven WHERE upc regexp $search");
+    $user_check = mysql_num_rows($sql_user_check);
+    if ($user_check == 1) { // found a match
+      $all = mysql_fetch_array($sql_user_check);
+      $upc = $all['upc']; // get the exact upc that matched, so we can remove 1 item
+    }
+  }
+
   if ($user_check <= 0) { // modified upc doesn't exist, ERROR
     echo '<TABLE id=AutoNumber5 style="BORDER-COLLAPSE: collapse" borderColor=#111111 bgcolor=black
     height=12 cellSpacing=3 cellPadding=3 width=600 border=1>
