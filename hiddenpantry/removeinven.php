@@ -1,5 +1,4 @@
 <?php
-$code = $_REQUEST['ean'];
 echo '<' . '?xml version="1.0" encoding="UTF-8" ?' . '>';
 ?>
 <HEAD>
@@ -49,7 +48,7 @@ include_once 'header.html';
   echo $qty;
 ?>
 "> Quantity<BR><BR><BR>
-<INPUT TYPE='TEXT' NAME='upc' ID= 'upc' VALUE='<?php echo "$code";?>' SIZE='15'> UPC<BR><BR><BR>
+<INPUT TYPE='TEXT' NAME='upc' ID= 'upc' VALUE='' SIZE='15'> UPC<BR><BR><BR>
 <p>
 <center><a href="https://play.google.com/store/apps/details?id=com.tecit.android.barcodekbd.demo" onClick="closeWin()">Install Barcode Keyboard Demo for Droid</a></center><BR><BR><br>
 <BR>
