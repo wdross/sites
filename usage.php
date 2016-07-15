@@ -1,4 +1,5 @@
 <?php
+$MB_PER_MO = 50000;
 $opts = array('http' => array(
     'method'  => 'GET',
     'header'  => "Content-Type: text/xml\r\n".
@@ -22,16 +23,30 @@ if ($result === false)
 else {
   // Find the row with this month's information
   $result = substr($result,strpos($result,"This month"));
-  // throw away 4 cells of information
-  for ($i = 1; $i <= 4; $i++) {
+  // throw away 3 cells of information, Download column
+  for ($i = 1; $i <= 3; $i++) {
     $result = substr($result,strpos($result,"<td")+3);
   }
   // get rid of the paragraph & formatting
   $result = substr($result,strpos($result,"<p"));
   $result = substr($result,strpos($result,">")+1);
-  // information I need it the number before the "/"
+  // information I need is the number before the "/"
   $MB = substr($result,0,strpos($result,"/")-1);
-  $used = $MB/50000*100.0; // % used
+  $used = $MB/$MB_PER_MO*100.0; // % used
+
+  // Find the row with LAST month's information
+  $result = substr($result,strpos($result,"Last month"));
+  // throw away 3 cells of information, Download column
+  for ($i = 1; $i <= 3; $i++) {
+    $result = substr($result,strpos($result,"<td")+3);
+  }
+  // get rid of the paragraph & formatting
+  $result = substr($result,strpos($result,"<p"));
+  $result = substr($result,strpos($result,">")+1);
+  // information I need is the number before the "/"
+  $lmMB = substr($result,0,strpos($result,"/")-1);
+  $lmused = $lmMB/$MB_PER_MO*100.0; // % used
+
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
@@ -68,14 +83,20 @@ $(document).ready(function() {
 		xAxis: {
 			categories: [
 <?php
-  echo "'Data (".$MB."MB of 50000MB used)',";
+  echo "'Data (".$MB."MB of ".$MB_PER_MO."MB used)',";
   // what is today's date (day within month)
   $today = getdate(); // associative array
   // how many days in this month?
   $DaysInMonth = cal_days_in_month(CAL_GREGORIAN, $today['mon'], $today['year']);
-  echo "'Month (".$today['mday']." of ".$DaysInMonth." days elapsed)'],\n";
+  echo "'Month (".$today['mday']." of ".$DaysInMonth." days elapsed)',";
+  echo "'Last Month Data (".$lmMB."MB of ".$MB_PER_MO."MB used)'],\n";
 ?>
 			title: { text: null }
+		},
+		plotOptions: {
+			series: {
+				colorByPoint: true
+			}
 		},
 	        series: [
 		{
@@ -84,13 +105,20 @@ $(document).ready(function() {
 <?php
   // data used and month used ratios?  Spit them out
   $mused = $today['mday']/$DaysInMonth*100.0;
-  echo $used.",".$mused."],\n";
+  echo $used.",".$mused.",".$lmused."],\n";
+  echo "colors: [";
+  // set 2 colors for the current month's Data and Time
   if ($used + 10 < $mused) // at least 10% less
-    echo "color: '#00FF00'\n"; // green
+    echo "'#00FF00','#00FF00'"; // green
   else if ($used < $mused) // not over
-    echo "color: 'Yellow'\n";
+    echo "'Yellow','Yellow'";
   else
-    echo "color: 'Red'\n"; // too much used
+    echo "'Red','Red'"; // too much used
+  // set 1 color for last month, above or below monthly limit
+  if ($lmused < 100)
+    echo ",'Green']";
+  else
+    echo ",'Red']";
 ?>
 	        }]
 	    });
