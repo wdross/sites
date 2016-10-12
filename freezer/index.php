@@ -64,6 +64,16 @@ $(document).ready(function() {
 	            name: 'Deg F',
 	            data: [
 <?php
+// Load older data when special variable is set (?history on the end of the URL)
+if (isset($_GET["history"]) and (($handle = fopen("history.csv", "r")) !== FALSE)) {
+    while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+        if (count($data) >= 2) { // valid lines have 2 or more columns of data
+            echo "[" . $data[0] . "," . $data[1] . "],\n";
+        }
+    }
+    fclose($handle);
+}
+
 // Open the CSV maintained by the background Python script and load
 // our array of data with the information stored in there (since midnight)
 if (($handle = fopen("freezer.csv", "r")) !== FALSE) {
