@@ -3,7 +3,12 @@ include_once 'db.php';
 include_once 'header.html';
 ?>
 <HTML>
-<BODY>
+<SCRIPT LANGUAGE="JavaScript">
+function toForm() {
+  document.form.cat.focus(); // Put focus on the category text entry box
+}
+</SCRIPT>
+<BODY onLoad="toForm()";>
 
 <TABLE id=AutoNumber7 style="BORDER-COLLAPSE: collapse" borderColor=#009900 
       height=12 cellSpacing=3 cellPadding=3 width=600 border=3 align="center">
