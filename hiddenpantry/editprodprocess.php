@@ -22,14 +22,12 @@ if($user_check == 0){
   if ($sameas != '') {
     echo "<center><b><font face='tahoma' color='black'>$sameas not present, SAME AS not updated</b><br />";
   }
+  $sameas = '';
+}
 
-  $sql = mysql_query("UPDATE  inven SET quant='$quant', brand='$brand', descrip='$descrip', size='$size',
-                      flavor='$flavor', cat='$cat' WHERE upc='$upc'");
-}
-else {
-  $sql = mysql_query("UPDATE  inven SET quant='$quant', brand='$brand', descrip='$descrip', size='$size',
-                     flavor='$flavor', cat='$cat', sameas='$sameas' WHERE upc='$upc'");
-}
+$sql = mysql_query("UPDATE  inven SET quant='$quant', brand='$brand', descrip='$descrip', size='$size',
+                   flavor='$flavor', cat='$cat', sameas='$sameas' WHERE upc='$upc'");
+
 
 if(!$sql){
   echo 'A database update error occured . Please contact support.';
