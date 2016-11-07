@@ -16,7 +16,12 @@ echo $upc;
 echo "<BR>";
 
 if ($sameas != "") {
-  $sql_check = mysql_query("SELECT upc FROM inven WHERE upc='$_POST[sameas]'");
+
+  if (strlen($sameas) > 12 and substr($sameas,0,1) == "0") {
+    $sameas = substr($sameas,-12); // shorten zero-prefix upc, cause they shouldn't be that long!
+  }
+
+  $sql_check = mysql_query("SELECT upc FROM inven WHERE upc='$sameas'");
   $user_check = mysql_num_rows($sql_check);
   if($user_check == 0){
     echo "<center><b><font face='tahoma' color='black'>$sameas not present, SAME AS not saved; you'll have to edit this one!</b><br />";
@@ -31,7 +36,7 @@ if (strlen($upc) > 12 and substr($upc,0,1) == "0") {
 
 
 //check that upc does not already exist
-$sql_user_check = mysql_query("SELECT upc FROM inven WHERE upc='$_POST[upc]'");
+$sql_user_check = mysql_query("SELECT upc FROM inven WHERE upc='$upc'");
 $user_check = mysql_num_rows($sql_user_check);
 
 if(($user_check == 0)){
