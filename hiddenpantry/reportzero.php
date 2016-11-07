@@ -7,7 +7,17 @@ include_once 'reportheader.html';
 echo "<hr>";
 //                          "SELECT (case when sameas='' then upc else sameas end) as same, sum(quant)    quant, brand, descrip, size, flavor, cat FROM inven WHERE quant = '0'");
 mysql_query("DROP TEMPORARY TABLE IF EXISTS tally");
-$tt = mysql_query("CREATE TEMPORARY TABLE tally SELECT (CASE WHEN sameas='' THEN upc ELSE sameas END) AS same, SUM(quant) AS total, brand, descrip, size, flavor, cat FROM inven GROUP BY same");
+$tt = mysql_query("CREATE TEMPORARY TABLE tally
+  SELECT
+  (CASE WHEN sameas = '' THEN upc ELSE sameas END) AS same,
+  SUM(quant) AS total,
+  (SELECT brand   FROM inven WHERE upc = same) AS brand,
+  (SELECT descrip FROM inven WHERE upc = same) AS descrip,
+  (SELECT size    FROM inven WHERE upc = same) AS size,
+  (SELECT flavor  FROM inven WHERE upc = same) AS flavor,
+  (SELECT cat     FROM inven WHERE upc = same) AS cat
+FROM inven
+GROUP BY same");
 $deflist = mysql_query("SELECT same, total, brand, descrip, size, flavor, cat FROM tally WHERE total = 0 ORDER BY cat ASC, descrip ASC, brand ASC");
 
 //$deflist=mysql_query("SELECT (case when sameas = '' then upc else sameas end) as same, sum(quant) quant, brand, descrip, size, flavor, cat FROM inven WHERE quant = '0' GROUP BY same ORDER BY cat ASC, descrip ASC, brand ASC");

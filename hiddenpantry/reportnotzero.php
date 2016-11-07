@@ -8,7 +8,17 @@ $sql = mysql_query(
 "ALTER TABLE inven ORDER BY cat ASC, descrip ASC, brand ASC");
 echo "<hr>";
 $deflist=mysql_query(
-        "SELECT (case when sameas = '' then upc else sameas end) as same, sum(quant) quant, brand, descrip, size, flavor, cat FROM inven WHERE quant > '0' GROUP BY same");
+        "SELECT
+  (CASE WHEN sameas = '' THEN upc ELSE sameas END) AS same,
+  SUM(quant) AS quant,
+  (SELECT brand   FROM inven WHERE upc = same) AS brand,
+  (SELECT descrip FROM inven WHERE upc = same) AS descrip,
+  (SELECT size    FROM inven WHERE upc = same) AS size,
+  (SELECT flavor  FROM inven WHERE upc = same) AS flavor,
+  (SELECT cat     FROM inven WHERE upc = same) AS cat
+FROM inven
+WHERE quant > 0
+GROUP BY same");
 while ($all = mysql_fetch_array($deflist)) {
    $results[$all['cat']][] = array ('upc' => $all['same'], 'quant' => $all['quant'], 'brand' => $all['brand'], 'descrip' => $all['descrip'], 'size' => $all['size'], 'flavor' => $all['flavor']);
 }
