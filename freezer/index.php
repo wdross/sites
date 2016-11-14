@@ -36,7 +36,8 @@ $(document).ready(function() {
 	chart = new Highcharts.Chart({
 		chart: {
 			renderTo: 'container',
-			defaultSeriesType: 'spline',
+			type: 'spline',
+			zoomType: 'xy',
 			events: {
 				load: requestData
 			}
