@@ -29,7 +29,7 @@ else
 while ($prod = mysql_fetch_array($prodlist)) {
   $total = $total + $prod['quant'];
   $num = $num + 1;
-  if ($prod['sameas'] != $sameas)
+  if ($prod['sameas'] != $sameas && $sameas != '' && $prod['sameas'] != '')
     $badSames .= ' ' . $prod['sameas'] . ' listed for UPC ' . $prod['upc'];
 }
 
@@ -93,7 +93,15 @@ include_once 'selectlist.php';
 
 <?php if (($num > 1) || ($total != $quant)): ?>
 <FONT FACE=TAHOMA SIZE=4 color=red><B> Total:
-<?php echo $total; echo ' ('; echo $num; echo " records)"; ?>
+
+<?php
+  echo $total.' <A HREF="search.php?data=';
+  if ($sameas != '')
+    echo $sameas;
+  else // we use our own upc
+    echo $upc;
+  echo '">('; echo $num; echo " records)</A>"; ?>
+
 <?php if ($badSames) echo $badSames; ?>
 </B></FONT>
 <?php endif ?>
