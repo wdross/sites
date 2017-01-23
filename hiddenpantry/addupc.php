@@ -54,19 +54,15 @@ else if ((strtoupper($upc) == "ADD") || ($quan < 0) || (strlen($upc) <= 4)) {
 
   if ($user_check <= 0 and
       strlen($upc) == 7) { //if short upc doesn't exist in database, check for one with 1 more digit
-    $search = "'^$upc";
-    $search .= "[0-9]$'"; // built in 2 steps, as otherwise [] looks like a subscript on $upc
-    $sql_user_check = mysql_query("SELECT upc FROM inven WHERE upc regexp $search");
-    $user_check = mysql_num_rows($sql_user_check);
-    if ($user_check == 1) { // found a match
-      $all = mysql_fetch_array($sql_user_check);
-      $upc = $all['upc']; // get the exact upc that matched, so we can add 1 item
-    }
+    $search = "'^$upc";   // yield the actual value of upc with a 'begin' indicator (^)
+    $search .= "[0-9]$'"; // built in 2 steps, as otherwise [0-9] 'end' ($) looks like a subscript on $upc
+    $contlist = mysql_query("SELECT * FROM inven WHERE upc regexp $search");
+    $user_check = mysql_num_rows($contlist);
   }
 
   while ($all = mysql_fetch_array($contlist)) {
     $quan1 = $all['quant'];
-    $upc1 = $all['upc'];
+    $upc = $all['upc'];
     $brand = $all['brand'];
     $descrip = $all['descrip'];
     $size = $all['size'];
