@@ -1,1 +1,1 @@
-tail -f /var/log/apache2/error.log
+tail -f -n 40 /var/log/apache2/error.log
