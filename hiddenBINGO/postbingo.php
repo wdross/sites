@@ -11,6 +11,13 @@ $free = trim(mysql_real_escape_string($_POST["free"]));
 $phrases = trim(mysql_real_escape_string($_POST["phrases"]));
 $lastupdate = date("Y/m/d H:i:s"); // now
 
+  $remote = $_SERVER['REMOTE_ADDR'];
+
+  // $user = trim(mysql_real_escape_string($_POST["free"]));
+  // ipaddress is $remote
+  // $when = $lastupdate
+
+
 if (strlen($short) > 0) {
   //check that Category does not already exist
   $sql_user_check = mysql_query("SELECT shortname FROM bingo WHERE shortname='$short'");
@@ -23,7 +30,8 @@ if (strlen($short) > 0) {
       echo "A database error occured while adding category '.$cat.'.";
     }
     else {
-      echo "<center><font face='tahoma' color='black' size='2'><b>".$short." added to database.<br />";
+      echo "<center><font face='tahoma' color='black' size='2'><b>".$short." added to database from IP $remote.<br />";
+      $what = "CREATE";
     }
   }else{
     // already exists, so let's perform an update
@@ -33,9 +41,12 @@ if (strlen($short) > 0) {
       echo "<center><b><font face='tahoma' color='red'>Game <b>".$short."</b> FAILED TO UPDATE!</b><br><br /></center>";
       echo $sqlquery;
     } else {
-      echo "<center><b><font face='tahoma' color='red'>Game <b>".$short."</b> updated!</b><br><br /></center>";
+      echo "<center><b><font face='tahoma' color='red'>Game <b>".$short."</b> created!</b><br><br /></center>";
+      $what = "EDIT";
     }
   }
+  mysql_query("INSERT INTO usages (ipaddress, eventdatetime, what) VALUES('$remote','$lastupdate','$what')")
+                        or die (mysql_error());
 }
 // else quietly ignore empty/whitespace request
 include_once 'index.php';

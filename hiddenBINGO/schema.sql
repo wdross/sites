@@ -40,4 +40,13 @@ CREATE TABLE `bingo` (
   PRIMARY KEY (`shortname`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- Created on 2018-12-31
+DROP TABLE IF EXISTS `usages`;
+CREATE TABLE `usages` (
+  `user` varchar(70),
+  `ipaddress` varchar(70) NOT NULL,
+  `eventdatetime` DATETIME NOT NULL,
+  `what` varchar(10) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+
+-- Created on 2018-12-31; usages added 2019-02-26

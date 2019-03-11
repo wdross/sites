@@ -76,6 +76,16 @@ if ($avail > 0) {
   if ($numphrases < 25) {
     echo "<p>Not enough phrases are configured, so we had to reuse some of them.</p>\n";
   }
+  $remote = $_SERVER['REMOTE_ADDR'];
+  echo "<p>Playing from IP $remote";
+
+  // $user = trim(mysql_real_escape_string($_POST["free"]));
+  // ipaddress is $remote
+  $when = date("Y/m/d H:i:s"); // now
+  $what = "PLAY";                // user, ipaddress, when, what
+  mysql_query("INSERT INTO usages (ipaddress, eventdatetime, what) VALUES('$remote','$when','$what')")
+                        or die (mysql_error());
+
 } else {
   echo "No valid game found: '$short' has $avail phrases";
 }
