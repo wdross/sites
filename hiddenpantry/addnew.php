@@ -28,6 +28,7 @@ if ($quan == "")
 <FONT FACE=TAHOMA SIZE=4 color=red><B> Add a new item to the database</B></FONT><HR>
 
 <?php
+ini_set('default_socket_timeout',10);
 $content = file_get_contents('http://www.upcdatabase.com/item/'.$upc);
 
 preg_match('#<tr><td>Description</td><td></td><td>(.*)</td></tr>#', $content, $match);
