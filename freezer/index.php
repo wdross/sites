@@ -67,12 +67,19 @@ $(document).ready(function() {
 <?php
 // Load older data when special variable is set (?history on the end of the URL)
 if (isset($_GET["history"]) and (($handle = fopen("history.csv", "r")) !== FALSE)) {
+    $l = 0; // how many lines we've found and formatted
     while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
         if (count($data) >= 2) { // valid lines have 2 or more columns of data
-            echo "[" . $data[0] . "," . $data[1] . "],\n";
+            $line[$l++] = "[" . $data[0] . "," . $data[1];
         }
     }
     fclose($handle);
+
+    // we'll get up to 30,000 lines from the end of the history file
+    $c = max(0,$l-30000);
+    while ($c < $l) {
+        echo $line[$c++] . "],\n";
+    }
 }
 
 // Open the CSV maintained by the background Python script and load
