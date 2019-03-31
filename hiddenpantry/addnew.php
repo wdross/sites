@@ -18,6 +18,16 @@ if ($quan == "")
 ?>
 <HTML>
 <BODY>
+<SCRIPT>
+function checkform() {
+    if(document.form.cat.value == "") {
+        alert("Please select a valid category");
+        return false;
+    } else {
+        return true;
+    }
+}
+</SCRIPT>
 
 <TABLE id=AutoNumber7 style="BORDER-COLLAPSE: collapse" borderColor=#009900 
       height=12 cellSpacing=3 cellPadding=3 width=600 border=3 align="center">
@@ -61,7 +71,7 @@ When typing a description try to keep it as simple as possible.</font></TD></TR>
 <TD  width="75%"  height=25 align=left vAlign=bottom><INPUT TYPE="TEXT" NAME="flavor" SIZE="10"></TD></TR>
 <TR><TD  width="25%"  height=25 align=right vAlign=bottom> CATEGORY: &nbsp </TD>
 <TD  width="75%"  height=25 align=left vAlign=bottom><select name="cat">
-
+<option selected></option>
 <?php
 include_once 'selectlist.php';
 ?>
@@ -81,7 +91,7 @@ include_once 'selectlist.php';
       <TBODY>
       <TR>
       <TD><CENTER><br>
-<INPUT TYPE="SUBMIT" NAME="submit" VALUE="Add new item to database now"></TD></TR> 
+<INPUT TYPE="SUBMIT" NAME="submit" VALUE="Add new item to database now" onClick="return checkform()"></TD></TR>
 </FORM>
 </TABLE>
 </TR></TD></TABLE>
