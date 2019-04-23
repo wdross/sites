@@ -45,7 +45,7 @@ if (strlen($short) > 0) {
       $what = "EDIT";
     }
   }
-  mysql_query("INSERT INTO usages (ipaddress, eventdatetime, what) VALUES('$remote','$lastupdate','$what')")
+  mysql_query("INSERT INTO usages (ipaddress, eventdatetime, what, game) VALUES('$remote','$lastupdate','$what','$short')")
                         or die (mysql_error());
 }
 // else quietly ignore empty/whitespace request

@@ -45,7 +45,8 @@ CREATE TABLE `usages` (
   `user` varchar(70),
   `ipaddress` varchar(70) NOT NULL,
   `eventdatetime` DATETIME NOT NULL,
-  `what` varchar(10) NOT NULL
+  `what` varchar(10) NOT NULL,
+  `game` varchar(30) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 

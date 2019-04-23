@@ -83,7 +83,7 @@ if ($avail > 0) {
   // ipaddress is $remote
   $when = date("Y/m/d H:i:s"); // now
   $what = "PLAY";                // user, ipaddress, when, what
-  mysql_query("INSERT INTO usages (ipaddress, eventdatetime, what) VALUES('$remote','$when','$what')")
+  mysql_query("INSERT INTO usages (ipaddress, eventdatetime, what, game) VALUES('$remote','$when','$what','$short')")
                         or die (mysql_error());
 
 } else {
