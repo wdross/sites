@@ -52,6 +52,9 @@ if(($user_check == 0)){
   if(!$sql){
     echo 'A database error occured while adding your product.';
   }
+
+include_once 'checkmakeidentical.php';
+
 }else{
   echo "<center><b><font face='tahoma' color='red'>Item is already in database!</b><br><br /></center>";
 }  

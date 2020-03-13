@@ -60,6 +60,7 @@ else if ((strtoupper($upc) == "ADD") || ($quan < 0) || (strlen($upc) <= 4)) {
     $user_check = mysql_num_rows($contlist);
   }
 
+  $quan1=0; // default to none
   while ($all = mysql_fetch_array($contlist)) {
     $quan1 = $all['quant'];
     $upc = $all['upc'];

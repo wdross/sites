@@ -33,6 +33,8 @@ if(!$sql){
   echo 'A database update error occured . Please contact support.';
 }
 
+include_once 'checkmakeidentical.php';
+
 echo '<center><br>';
 echo '<font face=verdana size=4 color=red><b>';
 echo 'You have just updated<font color=black size=2><br> ' . $brand . ', ' . $descrip . ' - ' . $size . ' </font><br>Successfully';

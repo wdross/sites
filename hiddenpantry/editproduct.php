@@ -62,10 +62,24 @@ while ($prod = mysql_fetch_array($prodlist)) {
 
 </font>
 <TD  width="25%"  height=25 align=right vAlign=bottom>UPC: &nbsp </TD>
-<TD  width="75%"  height=25 align=LEFT vAlign=bottom><INPUT TYPE="HIDDEN" NAME="upc" SIZE="15" value="<?PHP echo $upc; ?>"><?PHP echo $upc; ?></td></tr>
- 
+<TD  width="75%"  height=25 align=LEFT vAlign=bottom><INPUT TYPE="HIDDEN" NAME="upc" SIZE="15" readonly value="<?PHP echo $upc; ?>"><?PHP echo $upc; ?></td></tr>
+
+<?php
+include_once 'brandlist.php';
+if ($singlebrand != "")
+  $brand = $singlebrand;
+?>
+
 <TR><TD  width="25%"  height=25 align=right vAlign=bottom>BRAND: &nbsp </TD>
-<TD  width="75%"  height=25 align=left vAlign=bottom><INPUT TYPE="TEXT" NAME="brand" SIZE="20" value="<?PHP echo $brand; ?>"></td></tr>
+<TD  width="75%"  height=25 align=left vAlign=bottom><INPUT TYPE="TEXT" NAME="brand" SIZE="20" list="brands" value="<?PHP echo $brand; ?>"></td></tr>
+
+<?php
+if ($mycount > 1) {
+  // we had multiple results from the same barcode prefix, give user option to make them all the same
+  echo '<tr><TD width="100%" height=25 align=right COLSPAN=2><INPUT TYPE="checkbox" NAME="makeidentical" ID="identical">';
+  echo 'Make all entries identical?</TD></tr>';
+}
+?>
 
 <TR><TD  width="25%"  height=25 align=right vAlign=bottom> DESCRIPTION: &nbsp </TD>
 <TD  width="75%"  height=25 align=left vAlign=bottom><INPUT TYPE="TEXT" NAME="descrip" SIZE="30" value="<?PHP echo $descrip; ?>"></TD></TR>
