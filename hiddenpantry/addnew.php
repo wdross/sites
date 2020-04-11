@@ -50,6 +50,23 @@ $size = $match[1];
 //echo "Description: $desc - Size/Weight: $size\n";
 ?>
 
+
+<!-- NEW DATABASE RETRIEVAL SETUP
+<?php
+/*
+$content = file_get_contents('http://www.upcitemdb.com/upc/'.$upc);
+
+preg_match('#<tr><td>associated with </td><td></td><td>(.*)</td></tr>#', $content, $match);
+$desc = $match[1];
+
+preg_match('#<tr><td>, </td><td></td><td>(.*)</td></tr>#', $content, $match);
+$size = $match[1];
+
+//echo "Description: $desc - Size/Weight: $size\n";
+*/
+?>
+-->
+
 <TABLE id=AutoNumber5 style="BORDER-COLLAPSE: collapse" borderColor=#009900 
       height=12 cellSpacing=3 cellPadding=3 width=590 border=0 align="center">
       <TBODY>

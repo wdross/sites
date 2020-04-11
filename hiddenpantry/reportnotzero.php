@@ -18,7 +18,8 @@ $deflist=mysql_query(
   (SELECT cat     FROM inven WHERE upc = same) AS cat
 FROM inven
 WHERE quant > 0
-GROUP BY same");
+GROUP BY same
+ORDER BY cat ASC, descrip ASC, brand ASC");
 while ($all = mysql_fetch_array($deflist)) {
    $results[$all['cat']][] = array ('upc' => $all['same'], 'quant' => $all['quant'], 'brand' => $all['brand'], 'descrip' => $all['descrip'], 'size' => $all['size'], 'flavor' => $all['flavor']);
 }
