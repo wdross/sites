@@ -48,7 +48,7 @@ echo "<center><font face='tahoma' color='black' size='2'>You now have <b>".$quan
 echo '</td></tr></table>';                    
 
   if(!$sql){
-    echo 'A database error occured while adding your product.';
+    echo 'A database error occurred while adding your product.';
     }
   
 

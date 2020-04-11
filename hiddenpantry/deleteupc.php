@@ -32,7 +32,7 @@ if(($user_check > 0)){
 $sql = mysql_query("DELETE FROM inven WHERE upc='$_GET[upc]'");
 
   if(!$sql){
-    echo 'A database error occured while deleting your product.';
+    echo 'A database error occurred while deleting your product.';
     }
   
 

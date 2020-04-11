@@ -94,7 +94,7 @@ include_once 'showone.php';
       echo '<source src="audio/Common/Im_sorry.wav" type="audio/wav">';
       echo '  Your browser does not support the audio element.';
       echo '</audio>';
-      echo 'A database error occured while adding your product.';
+      echo 'A database error occurred while adding your product.';
     }
 
   }else{

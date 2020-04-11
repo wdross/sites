@@ -98,7 +98,7 @@ include_once 'removeinven.php';
 include_once 'showone.php';
     echo '</td></tr></table>';
     if(!$sql){ //check for database errors, start layer 4
-      echo 'A database error occured while removing your product.';
+      echo 'A database error occurred while removing your product.';
       echo '<audio autoplay=true>';
       echo '<source src="audio/Common/Im_sorry.wav" type="audio/wav">';
       echo '  Your browser does not support the audio element.';

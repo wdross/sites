@@ -12,7 +12,7 @@ if ($user_check > 0) {
   $sql = mysql_query("DELETE FROM locations WHERE locate='$cat'");
 
   if(!$sql){
-    echo 'A database error occured while deleting Category .$cat.';
+    echo 'A database error occurred while deleting Category .$cat.';
   }
   else {
     echo "<center><b><font face='tahoma' color='black'>Removed ".$cat." From Database </font></b><br />";

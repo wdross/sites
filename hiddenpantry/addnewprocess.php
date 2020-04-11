@@ -50,7 +50,7 @@ if(($user_check == 0)){
   echo "<center><font face='tahoma' color='black' size='2'><b>".$quan." </b> ".$brand.", ".$descrip." - ".$size." Added to database.<br />";
 
   if(!$sql){
-    echo 'A database error occured while adding your product.';
+    echo 'A database error occurred while adding your product.';
   }
 
 include_once 'checkmakeidentical.php';

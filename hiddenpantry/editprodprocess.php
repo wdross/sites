@@ -30,7 +30,7 @@ $sql = mysql_query("UPDATE  inven SET quant='$quant', brand='$brand', descrip='$
 
 
 if(!$sql){
-  echo 'A database update error occured . Please contact support.';
+  echo 'A database update error occurred . Please contact support.';
 }
 
 include_once 'checkmakeidentical.php';

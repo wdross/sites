@@ -15,7 +15,7 @@ if (strlen($cat) > 0) {
     $sql = mysql_query("INSERT INTO locations (locate) VALUES('$cat')")
                         or die (mysql_error());
     if(!$sql){
-      echo "A database error occured while adding category '.$cat.'.";
+      echo "A database error occurred while adding category '.$cat.'.";
     }
     else {
       echo "<center><font face='tahoma' color='black' size='2'><b>".$cat." added to database.<br />";
